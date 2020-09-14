@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.aca.bigproject.model.Post;
+import com.aca.bigproject.network.PostAPI;
+import com.aca.bigproject.network.RetrofitClient;
 import com.aca.bigproject.repositories.PostRepositiry;
 
 import java.util.List;
@@ -14,14 +16,19 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.Retrofit;
 
 public class MainActivityViewModel extends ViewModel {
 
     private MutableLiveData<List<Post>> mPosts;
     private PostRepositiry postRepositiry;
     private MutableLiveData<Boolean> isUpdating = new MutableLiveData<>();
+
+
 
     public void init() {
         if (mPosts != null) {
@@ -33,8 +40,10 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public LiveData<List<Post>> getPosts() {
+
         return mPosts;
     }
+
 
     public LiveData<Boolean> getIsUpdating() {
         return isUpdating;
@@ -44,6 +53,7 @@ public class MainActivityViewModel extends ViewModel {
         isUpdating.setValue(true);
 
         //sleep for 2 seconds
+
 
         Observable.timer(5, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
@@ -74,4 +84,5 @@ public class MainActivityViewModel extends ViewModel {
                     }
                 });
     }
+
 }
