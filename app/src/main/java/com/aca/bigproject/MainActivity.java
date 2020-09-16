@@ -6,11 +6,14 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.aca.bigproject.adapters.RecyclerViewAdapter;
 import com.aca.bigproject.model.Comment;
@@ -80,11 +83,15 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RecyclerViewAdapter(this,mainActivityViewModel.getPosts().getValue());
         adapter.setPostClickListener(new RecyclerViewAdapter.RecyclerViewVH.OnPostClickListener() {
             @Override
-            public void onPostClick(int position, View v) {
+            public void onPostClick(int position, View v, TextView titleText,TextView descText) {
 
                 Intent intent = new Intent(v.getContext(), CommentActivity.class);
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(MainActivity.this, Pair.create( titleText,"title"),Pair.create(descText,"description"));
                 intent.putExtra("commentId",lista.get(position).getId());
-                startActivity(intent);
+                intent.putExtra("title",lista.get(position).getTitle());
+                intent.putExtra("description",lista.get(position).getBody());
+                startActivity(intent,options.toBundle());
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

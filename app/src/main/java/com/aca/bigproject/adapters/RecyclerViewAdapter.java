@@ -69,11 +69,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         @Override
         public void onClick(View view) {
-            postClickListener.onPostClick(getAdapterPosition(),view);
+            postClickListener.onPostClick(getAdapterPosition(),view,titleTv,descTv);
         }
 
         public interface OnPostClickListener{
-            void onPostClick(int position,View v);
+            void onPostClick(int position,View v,TextView title,TextView desc);
         }
     }
 }

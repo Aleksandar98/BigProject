@@ -6,12 +6,90 @@
     android:layout_height="match_parent"
     tools:context=".CommentActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbarComment"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <LinearLayout
+        android:layout_below="@id/toolbarComment"
+        android:id="@+id/titleHolder"
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
 
     <TextView
-        android:id="@+id/commentsTv"
-        android:gravity="center"
-        android:layout_centerInParent="true"
+        android:textSize="30sp"
+        android:text="Titel"
+        android:id="@+id/titleInComment"
+        android:transitionName="title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:text="Description"
+        android:id="@+id/descInComment"
+        android:transitionName="description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+        android:layout_below="@id/titleHolder"
+        android:id="@+id/commentDumiHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginTop="10dp"
+
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/commentDumi"
+        android:layout_marginLeft="20dp"
+        android:textSize="24sp"
         android:text="Comments"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:layout_gravity="center"
+            android:id="@+id/zoom_button"
+            android:src="@drawable/ic_zoom"
+            android:layout_marginLeft="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+
+        <ImageButton
+            android:layout_gravity="center"
+            android:id="@+id/add_comment_button"
+            android:src="@drawable/ic_baseline_add_24"
+            android:layout_marginLeft="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+    </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/comment_recy_item"
+        android:id="@+id/commentRecy"
+        android:layout_margin="10dp"
+        android:layout_below="@id/commentDumiHolder"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </RelativeLayout>

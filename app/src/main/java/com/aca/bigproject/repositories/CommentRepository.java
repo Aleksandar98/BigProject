@@ -26,7 +26,7 @@ public class CommentRepository {
 
     private static CommentRepository instance;
     private MutableLiveData<List<Comment>> data = new MutableLiveData<>();
-    private List<Comment> commentList = new ArrayList<>();
+
 
 
     private Retrofit retrofitClient = RetrofitClient.getInstance();
@@ -41,6 +41,7 @@ public class CommentRepository {
 
     public MutableLiveData<List<Comment>> getComments(int id){
         fetchComments(id);
+        List<Comment> commentList = new ArrayList<>();
         data.postValue(commentList);
         return data;
 
@@ -59,8 +60,8 @@ public class CommentRepository {
                     @Override
                     public void onNext(@NonNull List<Comment> comments) {
                         data.postValue(comments);
-                        commentList = comments;
-                        Log.d("commentList", "onNext: "+comments.size());
+                       // commentList = comments;
+
                     }
 
                     @Override
